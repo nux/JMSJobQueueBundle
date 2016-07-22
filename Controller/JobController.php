@@ -7,7 +7,7 @@ use JMS\DiExtraBundle\Annotation as DI;
 use JMS\JobQueueBundle\Entity\Job;
 use Pagerfanta\Adapter\DoctrineORMAdapter;
 use Pagerfanta\Pagerfanta;
-use Pagerfanta\View\TwitterBootstrapView;
+use Pagerfanta\View\TwitterBootstrap3View;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -49,7 +49,7 @@ class JobController
         $pager->setCurrentPage(max(1, (integer) $this->request->query->get('page', 1)));
         $pager->setMaxPerPage(max(5, min(50, (integer) $this->request->query->get('per_page', 20))));
 
-        $pagerView = new TwitterBootstrapView();
+        $pagerView = new TwitterBootstrap3View();
         $router = $this->router;
         $routeGenerator = function($page) use ($router, $pager) {
             return $router->generate('jms_jobs_overview', array('page' => $page, 'per_page' => $pager->getMaxPerPage()));
